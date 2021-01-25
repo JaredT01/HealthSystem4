@@ -8,8 +8,97 @@ namespace HealthSystem4
 {
     class Program
     {
+
+        static Player user = new Player();
+        static Enemy enemy = new Enemy();
+        public static int debugDamage = 0;
+        public static int debugHeal = 0;
         static void Main(string[] args)
         {
+            for (int x = 0; x < 1;)
+            {
+                if (user.alive == true)
+                {
+                    GameLoop();
+                }
+                else
+                {
+                    Console.WriteLine("Do you wish to run this again? Y/N");
+                    string answer = Console.ReadLine();
+                    if (answer == "y")
+                    {
+                        user.Reset();
+                    }
+                    else if (answer == "Y")
+                    {
+                        user.Reset();
+
+                    }
+                    else if (answer == "n")
+                    {
+                        x = 1;
+                    }
+                    else if (answer == "N")
+                    {
+                        x = 1;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                    }
+
+                }
+
+            }
+
+        }
+        static void GameLoop()
+        {
+            //Increases Damage and Heal to showcase the Health System
+            debugDamage = debugDamage + 25;
+            debugHeal = debugHeal + 5;
+
+            //Display Stats and handle equiping gear
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            Console.ReadKey(true);
+            Console.Clear();
+
+            //Taking Damage
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.TakeDamage(debugDamage);
+            if(enemy.alive == true)
+            {
+                enemy.TakeDamage(debugDamage);
+            }
+            Console.ReadKey(true);
+            Console.Clear();
+
+            //Checking the player to see if they died from the TakeDamage()
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.CheckPlayer();
+            enemy.CheckEnemy();
+
+            //Healing and Regenerating an alive player. Will be skipped if the player died
+            if (user.alive == true)
+            {
+                Console.Clear();
+                user.ShowStatsPlayer();
+                enemy.ShowStats();
+                user.Heal(debugHeal);
+                if (enemy.alive == true)
+                {
+                    enemy.Heal(debugHeal);
+                }
+                Console.Clear();
+                user.ShowStatsPlayer();
+                enemy.ShowStats();
+                user.Regenerate(debugHeal);
+            }
         }
     }
 }
+
