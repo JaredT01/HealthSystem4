@@ -16,6 +16,14 @@ namespace HealthSystem4
             alive = true;
 
         }
+        public void Reset()
+        {
+            health = 300;
+            maxHealth = 300;
+            name = "Bal, the Dark Lord";
+            State = "Alive";
+            alive = true;
+        }
         public void CheckEnemy() { 
         
         if(health <= 0)

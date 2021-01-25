@@ -51,6 +51,7 @@ namespace HealthSystem4
             health = 100;
             maxHealth = 100;
             name = "You";
+            State = "Alive";
             shield = 100;
             lives = 3;
             alive = true;

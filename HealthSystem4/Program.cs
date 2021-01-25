@@ -29,10 +29,12 @@ namespace HealthSystem4
                     if (answer == "y")
                     {
                         user.Reset();
+                        enemy.Reset();
                     }
                     else if (answer == "Y")
                     {
                         user.Reset();
+                        enemy.Reset();
 
                     }
                     else if (answer == "n")
@@ -63,7 +65,6 @@ namespace HealthSystem4
             Console.Clear();
             user.ShowStatsPlayer();
             enemy.ShowStats();
-            Console.ReadKey(true);
             Console.Clear();
 
             //Taking Damage
@@ -78,71 +79,60 @@ namespace HealthSystem4
                 Console.WriteLine("--------------------------------");
                 user.TakeDamage(debugDamage);
             }
+            user.CheckPlayer();
+            enemy.CheckEnemy();
             Console.ReadKey(true);
             Console.Clear();
 
-            //Checking the player to see if they died from the TakeDamage()
-            user.ShowStatsPlayer();
-            enemy.ShowStats();
-            user.CheckPlayer();
-            enemy.CheckEnemy();
-
-            //Healing and Regenerating an alive player. Will be skipped if the player died
-            if (user.alive == true)
-            {
-                Console.Clear();
-                user.ShowStatsPlayer();
-                enemy.ShowStats();
-                user.Heal(debugHeal);
-                if (enemy.alive == true)
-                {
-                    enemy.Heal(debugHeal);
-                }
-                Console.Clear();
-                user.ShowStatsPlayer();
-                enemy.ShowStats();
-                user.Regenerate(debugHeal);
-            }
         }
        static void AttackChoice()
         {
             for (int x = 0; x < 1;)
             {
                 Console.WriteLine("--------------------------------");
-                Console.WriteLine("Choose your attack:");
+                Console.WriteLine("Choose your move:");
                 Console.WriteLine("1) Fast Attack");
                 Console.WriteLine("2) Heavy Attack");
+                Console.WriteLine("3) Heal");
+                Console.WriteLine("4) Regenerate");
                 Console.WriteLine("--------------------------------");
                 string answer = Console.ReadLine();
-                Random rand = new Random();
-                int FoeAI = rand.Next(1, 2);
                 if (answer == "1")
                 {
                     
                     user.Attack();
-                    if(FoeAI == 1)
-                    {
-                        enemy.Attack();
-                    }
-                    else
-                    {
-                        enemy.HeavyAttack();
-                    }
+                    FoeAI();
                     x = 1;
 
                 }
                 else if (answer == "2")
                 {
-                    if (FoeAI == 1)
-                    {
-                        enemy.Attack();
-                    }
-                    else
-                    {
-                        enemy.HeavyAttack();
-                    }
+                    FoeAI();
                     user.HeavyAttack();
                     x = 1;
+                }else if(answer == "3")
+                {
+                    if(user.health == user.maxHealth)
+                    {
+                        Console.WriteLine("You can't heal past your max health which is: " + user.maxHealth);
+                        Console.ReadKey(true);
+                        Console.Clear();
+                        user.ShowStatsPlayer();
+                        enemy.ShowStats();
+                    }
+                    else { user.Heal(debugHeal); FoeAI(); x = 1; }
+                }
+                else if (answer == "4")
+                {
+                    if (user.shield == user.maxShield)
+                    {
+                        Console.WriteLine("You can't regen past your max shield which is: " + user.maxShield);
+                        Console.ReadKey(true);
+                        Console.Clear();
+                        user.ShowStatsPlayer();
+                        enemy.ShowStats();
+                    }
+                    else { user.Regenerate(debugHeal); FoeAI(); x = 1; }
                 }
                 else
                 {
@@ -150,6 +140,19 @@ namespace HealthSystem4
                     user.ShowStatsPlayer();
                     enemy.ShowStats();
                 }
+            }
+        }
+        static void FoeAI()
+        {
+                Random rand = new Random();
+                int FoeAI = rand.Next(1, 2);
+            if (FoeAI == 1)
+            {
+                enemy.Attack();
+            }
+            else
+            {
+                enemy.HeavyAttack();
             }
         }
     }

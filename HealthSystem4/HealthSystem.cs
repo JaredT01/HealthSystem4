@@ -49,8 +49,8 @@ namespace HealthSystem4
                         shield = 0;
                         if (damage > health)
                         {
-                            health = 0;
                             OriginalDamage = health;
+                            health = 0;
                         }
                         else
                         {
