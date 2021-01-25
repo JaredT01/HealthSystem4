@@ -77,7 +77,6 @@ namespace HealthSystem4
             else
             {
                 Console.WriteLine("--------------------------------");
-                Application.Restart();
                 user.TakeDamage(debugDamage);
             }
             Console.ReadKey(true);
