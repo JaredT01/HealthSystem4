@@ -69,6 +69,11 @@ namespace HealthSystem4
             Console.WriteLine(Program.user.name + " attacked " + Program.enemy.name + "!");
             Program.enemy.TakeDamage(Program.debugDamage);
         }
+        public void HeavyAttack()
+        {
+            Console.WriteLine(Program.user.name + " attacked with a Heavy Attack against " + Program.enemy.name + "!");
+            Program.enemy.TakeDamage(Program.debugDamage*2);
+        }
 
 
 

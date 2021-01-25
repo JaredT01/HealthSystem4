@@ -30,5 +30,11 @@ namespace HealthSystem4
             Console.WriteLine(Program.user.name + " took a hit from " + name);
             Program.user.TakeDamage(Program.debugDamage);
         }
+        public void HeavyAttack()
+        {
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine(Program.user.name + " took a powerful hit from " + name);
+            Program.user.TakeDamage(Program.debugDamage*2);
+        }
     }
 }

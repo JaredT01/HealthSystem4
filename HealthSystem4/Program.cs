@@ -71,8 +71,7 @@ namespace HealthSystem4
             enemy.ShowStats();
             if(enemy.alive == true)
             {
-                enemy.Attack();
-                user.Attack();
+                AttackChoice();
             }
             else
             {
@@ -103,6 +102,54 @@ namespace HealthSystem4
                 user.ShowStatsPlayer();
                 enemy.ShowStats();
                 user.Regenerate(debugHeal);
+            }
+        }
+       static void AttackChoice()
+        {
+            for (int x = 0; x < 1;)
+            {
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine("Choose your attack:");
+                Console.WriteLine("1) Fast Attack");
+                Console.WriteLine("2) Heavy Attack");
+                Console.WriteLine("--------------------------------");
+                string answer = Console.ReadLine();
+                Random rand = new Random();
+                int FoeAI = rand.Next(1, 2);
+                if (answer == "1")
+                {
+                    
+                    user.Attack();
+                    if(FoeAI == 1)
+                    {
+                        enemy.Attack();
+                    }
+                    else
+                    {
+                        enemy.HeavyAttack();
+                    }
+                    x = 1;
+
+                }
+                else if (answer == "2")
+                {
+                    if (FoeAI == 1)
+                    {
+                        enemy.Attack();
+                    }
+                    else
+                    {
+                        enemy.HeavyAttack();
+                    }
+                    user.HeavyAttack();
+                    x = 1;
+                }
+                else
+                {
+                    Console.Clear();
+                    user.ShowStatsPlayer();
+                    enemy.ShowStats();
+                }
             }
         }
     }
