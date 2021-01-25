@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace HealthSystem4
 {
     class Program
     {
 
-        static Player user = new Player();
-        static Enemy enemy = new Enemy();
+       public static Player user = new Player();
+        public static Enemy enemy = new Enemy();
         public static int debugDamage = 0;
         public static int debugHeal = 0;
         static void Main(string[] args)
@@ -68,10 +69,16 @@ namespace HealthSystem4
             //Taking Damage
             user.ShowStatsPlayer();
             enemy.ShowStats();
-            user.TakeDamage(debugDamage);
             if(enemy.alive == true)
             {
-                enemy.TakeDamage(debugDamage);
+                enemy.Attack();
+                user.Attack();
+            }
+            else
+            {
+                Console.WriteLine("--------------------------------");
+                Application.Restart();
+                user.TakeDamage(debugDamage);
             }
             Console.ReadKey(true);
             Console.Clear();

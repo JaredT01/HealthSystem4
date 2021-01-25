@@ -11,6 +11,8 @@ namespace HealthSystem4
         public Player()
         {
             health = 100;
+            maxHealth = 100;
+            maxShield = 100;
             name = "You";
             shield = 100;
             lives = 3;
@@ -47,6 +49,7 @@ namespace HealthSystem4
         public void Reset()
         {
             health = 100;
+            maxHealth = 100;
             name = "You";
             shield = 100;
             lives = 3;
@@ -54,34 +57,17 @@ namespace HealthSystem4
             Program.debugDamage = 0;
             Program.debugHeal = 0;
         }
-        public void Regenerate(int regen)
-        {
-            if (regen > 0)
-            {
-                if (shield + regen > 100)
-                {
 
-                }
-                else
-                {
-                    shield = shield + regen;
-                    Console.WriteLine("--------------------------------");
-                    Console.WriteLine(name + " regenerated for " + regen + " shield points.");
-                    Console.ReadKey(true);
-
-                }
-            }
-            else
-            {
-                Console.WriteLine("You cannot heal negative numbers! Please increase to a positive integer");
-
-            }
-        }
         public void ShowStatsPlayer()
         {
             ShowStats();
             Console.WriteLine("Shield: " + shield);
             Console.WriteLine("Lives: " + lives);
+        }
+        public void Attack()
+        {
+            Console.WriteLine(Program.user.name + " attacked " + Program.enemy.name + "!");
+            Program.enemy.TakeDamage(Program.debugDamage);
         }
 
 

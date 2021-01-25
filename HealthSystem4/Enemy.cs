@@ -10,8 +10,9 @@ namespace HealthSystem4
     {
         public Enemy()
         {
-            health = 100;
-            name = "Monster";
+            health = 300;
+            maxHealth = 300;
+            name = "Bal, the Dark Lord";
             alive = true;
 
         }
@@ -22,6 +23,12 @@ namespace HealthSystem4
                 State = "Dead";
                 alive = false;
             }
+        }
+        public void Attack()
+        {
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine(Program.user.name + " took a hit from " + name);
+            Program.user.TakeDamage(Program.debugDamage);
         }
     }
 }
