@@ -55,6 +55,7 @@ namespace HealthSystem4
             shield = 100;
             lives = 3;
             alive = true;
+            HasWon = false;
             Program.debugDamage = 0;
             Program.debugHeal = 0;
         }

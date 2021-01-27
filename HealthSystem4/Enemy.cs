@@ -14,6 +14,7 @@ namespace HealthSystem4
             maxHealth = 300;
             name = "Bal, the Dark Lord";
             alive = true;
+            hasTitle = true;
 
         }
         public void Reset()
@@ -28,6 +29,14 @@ namespace HealthSystem4
         
         if(health <= 0)
             {
+                if (hasTitle == true)
+                {
+                    Console.WriteLine(name + ", has died!");
+                }
+                else
+                {
+                    Console.WriteLine(name + " has died!");
+                }
                 State = "Dead";
                 alive = false;
             }

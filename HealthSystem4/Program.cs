@@ -14,43 +14,109 @@ namespace HealthSystem4
         public static Enemy enemy = new Enemy();
         public static int debugDamage = 0;
         public static int debugHeal = 0;
+        public static int DebugMode = 0; // 0 = Didn't choose, 1 = Yes, 2 = No
         static void Main(string[] args)
         {
             for (int x = 0; x < 1;)
             {
-                if (user.alive == true)
+                if (DebugMode == 0)
                 {
-                    GameLoop();
-                }
-                else
-                {
-                    Console.WriteLine("Do you wish to run this again? Y/N");
+                    Console.WriteLine("Do you wish to run this in debug mode? Y/N");
                     string answer = Console.ReadLine();
                     if (answer == "y")
                     {
-                        user.Reset();
-                        enemy.Reset();
+                        DebugMode = 1;
+                        Debug();
+                        x++;
                     }
                     else if (answer == "Y")
                     {
-                        user.Reset();
-                        enemy.Reset();
-
+                        DebugMode = 1;
+                        Debug();
+                        x++;
                     }
                     else if (answer == "n")
                     {
-                        x = 1;
+                        DebugMode = 2;
                     }
                     else if (answer == "N")
                     {
-                        x = 1;
+                        DebugMode = 2;
                     }
                     else
                     {
                         Console.Clear();
                     }
+                } else if(DebugMode == 1)
+                {
 
+                } else if(DebugMode == 2) {
+                    if (user.HasWon == true)
+                    {
+                        Console.WriteLine("Congrats! " + user.name + " took down the Dark Lord and won!");
+                        Console.WriteLine("Do you wish to run this again? Y/N");
+                        string answer = Console.ReadLine();
+                        if (answer == "y")
+                        {
+                            user.Reset();
+                            enemy.Reset();
+                        }
+                        else if (answer == "Y")
+                        {
+                            user.Reset();
+                            enemy.Reset();
+
+                        }
+                        else if (answer == "n")
+                        {
+                            x = 1;
+                        }
+                        else if (answer == "N")
+                        {
+                            x = 1;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                        }
+
+                    }
+                    
+                    else if (user.alive == true)
+                    {
+                        GameLoop();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Do you wish to run this again? Y/N");
+                        string answer = Console.ReadLine();
+                        if (answer == "y")
+                        {
+                            user.Reset();
+                            enemy.Reset();
+                        }
+                        else if (answer == "Y")
+                        {
+                            user.Reset();
+                            enemy.Reset();
+
+                        }
+                        else if (answer == "n")
+                        {
+                            x = 1;
+                        }
+                        else if (answer == "N")
+                        {
+                            x = 1;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                        }
+
+                    }
                 }
+               
 
             }
 
@@ -76,8 +142,7 @@ namespace HealthSystem4
             }
             else
             {
-                Console.WriteLine("--------------------------------");
-                user.TakeDamage(debugDamage);
+                user.HasWon = true;
             }
             user.CheckPlayer();
             enemy.CheckEnemy();
@@ -154,6 +219,102 @@ namespace HealthSystem4
             {
                 enemy.HeavyAttack();
             }
+        }
+
+        static void Debug()
+        {
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            Console.ReadKey();
+            user.TakeDamage(10);
+            enemy.TakeDamage(10);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.Regenerate(10);
+            enemy.Heal(10);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.TakeDamage(110);
+            enemy.TakeDamage(110);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.Heal(10);
+            enemy.Heal(10);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.TakeDamage(-110);
+            enemy.TakeDamage(-110);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.Heal(-10);
+            enemy.Heal(-10);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.TakeDamage(999);
+            enemy.TakeDamage(999);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            enemy.ShowStats();
+            user.CheckPlayer();
+            enemy.CheckEnemy();
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.TakeDamage(150);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.Regenerate(150);
+            user.Heal(150);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.TakeDamage(999);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.CheckPlayer();
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.TakeDamage(999);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.CheckPlayer();
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.TakeDamage(999);
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStatsPlayer();
+            user.CheckPlayer();
+            Console.ReadKey();
+            Console.WriteLine("Debug Mode has ended. We have tested the following: ");
+            Console.WriteLine("-Damage Spill over");
+            Console.WriteLine("-No over healing or over regeneration");
+            Console.WriteLine("-No taking damage over your max health/shield");
+            Console.WriteLine("-Healing/Regeneration with negative integers");
+            Console.WriteLine("-Negative Integers with Damage");
+            Console.WriteLine("-Using the player's lives");
+            Console.WriteLine(" ");
+            Console.WriteLine("Exit the program by pressing a button.");
+            Console.ReadKey();
         }
     }
 }

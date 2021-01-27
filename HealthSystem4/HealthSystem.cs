@@ -17,11 +17,14 @@ namespace HealthSystem4
         public bool alive = true;
         public bool hasShield = false;
         public string State = "Alive";
+        public bool HasWon = false;
+        public bool hasTitle = false;
 
 
         public void TakeDamage(int damage)
         {
             int OriginalDamage = damage;
+           
             if (hasShield == true)
             {
                 if (damage > 0)
@@ -58,7 +61,15 @@ namespace HealthSystem4
                         }
 
                     }
-                    Console.WriteLine(name + " took " + OriginalDamage + " points of damage!");
+                    if (hasTitle == true)
+                    {
+                        Console.WriteLine(name + ", took " + OriginalDamage + " points of damage!");
+                    }
+                    else
+                    {
+                        Console.WriteLine(name + " took " + OriginalDamage + " points of damage!");
+                    }
+                    
                     if (health < 0)
                     {
                         health = 0;
@@ -81,8 +92,20 @@ namespace HealthSystem4
                 }
                 else
                 {
+                    if(damage > health)
+                    {
+                        OriginalDamage = health;
+                    }
                     health = health - damage;
-                    Console.WriteLine(name + " took " + OriginalDamage + " points of damage!");
+                    if (hasTitle == true)
+                    {
+                        Console.WriteLine(name + ", took " + OriginalDamage + " points of damage!");
+                    }
+                    else
+                    {
+                        Console.WriteLine(name + " took " + OriginalDamage + " points of damage!");
+                    }
+                    
                     if (health <= 0)
                     {
                         State = "Dead";
@@ -113,20 +136,36 @@ namespace HealthSystem4
                         int Healed = maxHealth - health;
                         health = maxHealth;
                         Console.WriteLine("--------------------------------");
-                        Console.WriteLine(name + " healed for " + Healed + " health.");
+                        if (hasTitle == true)
+                        {
+                            Console.WriteLine(name + ", healed for " + Healed + " health.");
+                        }
+                        else
+                        {
+                            Console.WriteLine(name + " healed for " + Healed + " health.");
+                        }
 
                     }
                     else
                     {
                         health = health + heal;
                         Console.WriteLine("--------------------------------");
-                        Console.WriteLine(name + " healed for " + heal + " health.");
+                        if (hasTitle == true)
+                    {
+                            Console.WriteLine(name + ", healed for " + heal + " health.");
+                        }
+                    else
+                    {
+                            Console.WriteLine(name + " healed for " + heal + " health.");
+                        }
+                        
                         Console.ReadKey(true);
                     }
                 }
             }
             else
             {
+                Console.WriteLine("--------------------------------");
                 Console.WriteLine("You cannot heal negative numbers! Please increase to a positive integer");
 
             }
