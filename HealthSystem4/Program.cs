@@ -38,6 +38,10 @@ namespace HealthSystem4
                     else if (answer == "n")
                     {
                         DebugMode = 2;
+                        enemy.SetHasShield(false);
+                        enemy.SetHasLives(false);
+                        enemy.SetMaxHealth(300);
+                        enemy.SetHealth(enemy.GetMaxHealth());
                     }
                     else if (answer == "N")
                     {
@@ -211,7 +215,7 @@ namespace HealthSystem4
         static void FoeAI()
         {
                 Random rand = new Random();
-                int FoeAI = rand.Next(1, 2);
+                int FoeAI = rand.Next(1, 3);
             if (FoeAI == 1)
             {
                 enemy.Attack();
@@ -275,37 +279,50 @@ namespace HealthSystem4
             Console.ReadKey();
             Console.Clear();
             user.ShowStats();
-            user.TakeDamage(150);
+            enemy.ShowStats();
+            user.TakeDamage(999);
+            enemy.TakeDamage(999);
             Console.ReadKey();
             Console.Clear();
             user.ShowStats();
+            enemy.ShowStats();
+            user.CheckPlayer();
+            enemy.CheckEnemy();
+            Console.ReadKey();
+            Console.Clear();
+            user.ShowStats();
+            enemy.ShowStats();
             user.Regenerate(150);
+            enemy.Regenerate(150);
+            user.Regenerate(-150);
+            enemy.Regenerate(-150);
             user.Heal(150);
+            enemy.Heal(175);
             Console.ReadKey();
             Console.Clear();
             user.ShowStats();
+            enemy.ShowStats();
             user.TakeDamage(999);
-            Console.ReadKey();
+            enemy.TakeDamage(999);
             Console.Clear();
             user.ShowStats();
+            enemy.ShowStats();
             user.CheckPlayer();
+            enemy.CheckEnemy();
             Console.ReadKey();
             Console.Clear();
             user.ShowStats();
+            enemy.ShowStats();
             user.TakeDamage(999);
+            enemy.TakeDamage(999);
             Console.ReadKey();
             Console.Clear();
             user.ShowStats();
+            enemy.ShowStats();
             user.CheckPlayer();
+            enemy.CheckEnemy();
             Console.ReadKey();
             Console.Clear();
-            user.ShowStats();
-            user.TakeDamage(999);
-            Console.ReadKey();
-            Console.Clear();
-            user.ShowStats();
-            user.CheckPlayer();
-            Console.ReadKey();
             Console.WriteLine(" ");
             Console.WriteLine("Debug Mode has ended. We have tested the following: ");
             Console.WriteLine("-Damage Spill over");
@@ -314,6 +331,7 @@ namespace HealthSystem4
             Console.WriteLine("-Healing/Regeneration with negative integers");
             Console.WriteLine("-Negative Integers with Damage");
             Console.WriteLine("-Using the player's lives");
+            Console.WriteLine("-Using the enemy's lives");
             Console.WriteLine(" ");
             Console.WriteLine("Exit the program by pressing a button.");
             Console.ReadKey();

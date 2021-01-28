@@ -22,6 +22,15 @@ namespace HealthSystem4
         protected bool hasLives = false;
         protected int maxLives = 3;
 
+
+        public void SetHasShield(bool DesiredHasShield)
+        {
+            hasShield = DesiredHasShield;
+        }
+        public void SetHasLives(bool DesiredHasLives)
+        {
+            hasLives = DesiredHasLives;
+        }
         public void SetAlive(bool DesiredAlive)
         {
             alive = DesiredAlive;
@@ -88,7 +97,7 @@ namespace HealthSystem4
         }
         public void SetMaxShield(int DesiredMaxShield)
         {
-            shield = DesiredMaxShield;
+            maxShield = DesiredMaxShield;
         }
 
         public int GetMaxShield()
@@ -193,6 +202,14 @@ namespace HealthSystem4
         {
             Console.WriteLine("--------------" + name + "------------------");
             Console.WriteLine("Health: " + health);
+            if(hasShield == true)
+            {
+                Console.WriteLine("Shield: " + shield);
+            }
+            if(hasLives == true)
+            {
+                Console.WriteLine("Lives: " + lives);
+            }
             Console.WriteLine("State: " + State);
         }
 
@@ -266,7 +283,7 @@ namespace HealthSystem4
                 }
                 else
                 {
-                    Console.WriteLine("You cannot heal negative numbers! Please increase to a positive integer");
+                    Console.WriteLine("You cannot regenerate negative numbers! Please increase to a positive integer");
 
                 }
             }

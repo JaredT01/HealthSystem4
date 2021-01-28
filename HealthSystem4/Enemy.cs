@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthSystem4
 {
@@ -10,28 +6,65 @@ namespace HealthSystem4
     {
         public Enemy()
         {
-            SetHealth(300);
-            maxHealth = 300;
+            SetHealth(150);
+            maxHealth = 150;
+            SetMaxShield(50);
+            SetShield(GetMaxShield());
             name = "Bal, the Dark Lord";
             alive = true;
             hasTitle = true;
+            hasShield = true;
+            hasLives = true;
+            SetLives(3);
+            maxLives = 3;
 
         }
         
-        public void CheckEnemy() { 
-        
-        if(GetHealth() <= 0)
+        public void CheckEnemy() {
+            if (hasLives == true)
             {
-                if (hasTitle == true)
+                if (GetHealth() <= 0)
                 {
-                    Console.WriteLine(name + ", has died!");
+                    if (GetLives() > 0)
+                    {
+                        Console.WriteLine("--------------------------------");
+                        Console.WriteLine(name + " died. However, " + name + " had another life. Lucky.");
+                        SetLives(GetLives() - 1);
+                        SetHealth(maxHealth);
+                        SetShield(maxShield);
+                        Console.ReadKey(true);
+                        State = "Alive";
+                    }
+                    else
+                    {
+                        if (hasTitle == true)
+                        {
+                            Console.WriteLine(name + ", has died!");
+                        }
+                        else
+                        {
+                            Console.WriteLine(name + " has died!");
+                        }
+                        State = "Dead";
+                        alive = false;
+                    }
+                    
                 }
-                else
+            }
+            else {
+                if (GetHealth() <= 0)
                 {
-                    Console.WriteLine(name + " has died!");
+                    if (hasTitle == true)
+                    {
+                        Console.WriteLine(name + ", has died!");
+                    }
+                    else
+                    {
+                        Console.WriteLine(name + " has died!");
+                    }
+                    State = "Dead";
+                    alive = false;
                 }
-                State = "Dead";
-                alive = false;
             }
         }
         public void Attack()
