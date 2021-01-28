@@ -18,6 +18,7 @@ namespace HealthSystem4
             SetLives(3);
             alive = true;
             hasShield = true;
+            hasLives = true;
 
         }
         public void CheckPlayer()
