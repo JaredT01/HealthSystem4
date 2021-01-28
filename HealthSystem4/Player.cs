@@ -10,27 +10,27 @@ namespace HealthSystem4
     {
         public Player()
         {
-            health = 100;
+            SetHealth(100);
             maxHealth = 100;
             maxShield = 100;
             name = "You";
-            shield = 100;
-            lives = 3;
+            SetShield(100);
+            SetLives(3);
             alive = true;
             hasShield = true;
 
         }
         public void CheckPlayer()
         {
-            if (health <= 0)
+            if (GetHealth() <= 0)
             {
-                if (lives > 0)
+                if (GetLives() > 0)
                 {
                     Console.WriteLine("--------------------------------");
                     Console.WriteLine(name + " died. However, " + name + " had another life. Lucky.");
-                    lives = lives - 1;
-                    health = 100;
-                    shield = 100;
+                    SetLives(GetLives() - 1);
+                    SetHealth(maxHealth);
+                    SetShield(100);
                     Console.ReadKey(true);
                     State = "Alive";
                     Program.debugHeal = 5;
@@ -46,34 +46,21 @@ namespace HealthSystem4
             }
 
         }
-        public void Reset()
-        {
-            health = 100;
-            maxHealth = 100;
-            name = "You";
-            State = "Alive";
-            shield = 100;
-            lives = 3;
-            alive = true;
-            HasWon = false;
-            Program.debugDamage = 0;
-            Program.debugHeal = 0;
-        }
 
-        public void ShowStatsPlayer()
+        public new void ShowStats()
         {
-            ShowStats();
-            Console.WriteLine("Shield: " + shield);
-            Console.WriteLine("Lives: " + lives);
+            base.ShowStats();
+            Console.WriteLine("Shield: " + GetShield());
+            Console.WriteLine("Lives: " + GetLives());
         }
         public void Attack()
         {
-            Console.WriteLine(Program.user.name + " attacked " + Program.enemy.name + "!");
+            Console.WriteLine(Program.user.name + " attacked " + Program.enemy.GetName() + "!");
             Program.enemy.TakeDamage(Program.debugDamage);
         }
         public void HeavyAttack()
         {
-            Console.WriteLine(Program.user.name + " attacked with a Heavy Attack against " + Program.enemy.name + "!");
+            Console.WriteLine(Program.user.name + " attacked with a Heavy Attack against " + Program.enemy.GetName() + "!");
             Program.enemy.TakeDamage(Program.debugDamage*2);
         }
 

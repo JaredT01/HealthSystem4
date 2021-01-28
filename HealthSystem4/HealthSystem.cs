@@ -8,19 +8,94 @@ namespace HealthSystem4
 {
     abstract class HealthSystem
     {
-        public int health;
-        public int maxShield;
-        public int maxHealth;
-        public int shield;
-        public int lives;
-        public string name;
-        public bool alive = true;
-        public bool hasShield = false;
-        public string State = "Alive";
-        public bool HasWon = false;
-        public bool hasTitle = false;
+        private int health;
+        protected int maxShield;
+        protected int maxHealth;
+        private int shield;
+        private int lives;
+        protected string name;
+        protected bool alive = true;
+        protected bool hasShield = false;
+        protected string State = "Alive";
+        protected bool HasWon = false;
+        protected bool hasTitle = false;
+        protected bool hasLives = false;
+        protected int maxLives = 3;
 
+        public void SetAlive(bool DesiredAlive)
+        {
+            alive = DesiredAlive;
+        }
+        public bool GetAlive()
+        {
+            return alive;
+        }
+        public void SetVictory(bool victory)
+        {
+            HasWon = victory;
+        }
+        public bool GetVictory()
+        {
+            return HasWon;
+        }
+        public void SetLives(int DesiredLives)
+        {
+            lives = DesiredLives;
+        }
+        public int GetLives()
+        {
 
+            return lives;
+        }
+        public void SetName(string DesiredName)
+        {
+           name = DesiredName;
+        }
+        public string GetName()
+        {
+
+            return name;
+        }
+        public void SetHealth(int DesiredHealth)
+        {
+            health = DesiredHealth;
+        }
+
+        public int GetHealth()
+        {
+            
+            return health;
+        }
+        public void SetShield(int DesiredShield)
+        {
+            shield = DesiredShield;
+        }
+
+        public int GetShield()
+        {
+
+            return shield;
+        }
+        public void SetMaxHealth(int DesiredMaxHealth)
+        {
+            maxHealth = DesiredMaxHealth;
+        }
+
+        public int GetMaxHealth()
+        {
+
+            return maxHealth;
+        }
+        public void SetMaxShield(int DesiredMaxShield)
+        {
+            shield = DesiredMaxShield;
+        }
+
+        public int GetMaxShield()
+        {
+
+            return maxShield;
+        }
         public void TakeDamage(int damage)
         {
             int OriginalDamage = damage;
@@ -199,6 +274,24 @@ namespace HealthSystem4
             {
                 Console.WriteLine(name + " does not have a shield and therefore cannot regenerate a shield.");
             }
+        }
+
+        public void Reset()
+        {
+            health = maxHealth;
+            if(hasShield == true)
+            {
+                shield = maxShield;
+            }
+            if(hasLives == true)
+            {
+                lives = maxLives;
+            }
+            State = "Alive";
+            alive = true;
+            HasWon = false;
+            Program.debugDamage = 0;
+            Program.debugHeal = 0;
         }
 
 

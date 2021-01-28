@@ -10,24 +10,17 @@ namespace HealthSystem4
     {
         public Enemy()
         {
-            health = 300;
+            SetHealth(300);
             maxHealth = 300;
             name = "Bal, the Dark Lord";
             alive = true;
             hasTitle = true;
 
         }
-        public void Reset()
-        {
-            health = 300;
-            maxHealth = 300;
-            name = "Bal, the Dark Lord";
-            State = "Alive";
-            alive = true;
-        }
+        
         public void CheckEnemy() { 
         
-        if(health <= 0)
+        if(GetHealth() <= 0)
             {
                 if (hasTitle == true)
                 {
@@ -44,13 +37,13 @@ namespace HealthSystem4
         public void Attack()
         {
             Console.WriteLine("--------------------------------");
-            Console.WriteLine(Program.user.name + " took a hit from " + name);
+            Console.WriteLine(Program.user.GetName() + " took a hit from " + name);
             Program.user.TakeDamage(Program.debugDamage);
         }
         public void HeavyAttack()
         {
             Console.WriteLine("--------------------------------");
-            Console.WriteLine(Program.user.name + " took a powerful hit from " + name);
+            Console.WriteLine(Program.user.GetName() + " took a powerful hit from " + name);
             Program.user.TakeDamage(Program.debugDamage*2);
         }
     }

@@ -51,9 +51,9 @@ namespace HealthSystem4
                 {
 
                 } else if(DebugMode == 2) {
-                    if (user.HasWon == true)
+                    if (user.GetVictory() == true)
                     {
-                        Console.WriteLine("Congrats! " + user.name + " took down the Dark Lord and won!");
+                        Console.WriteLine("Congrats! " + user.GetName() + " took down the Dark Lord and won!");
                         Console.WriteLine("Do you wish to run this again? Y/N");
                         string answer = Console.ReadLine();
                         if (answer == "y")
@@ -82,7 +82,7 @@ namespace HealthSystem4
 
                     }
                     
-                    else if (user.alive == true)
+                    else if (user.GetAlive() == true)
                     {
                         GameLoop();
                     }
@@ -129,20 +129,20 @@ namespace HealthSystem4
 
             //Display Stats and handle equiping gear
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             Console.Clear();
 
             //Taking Damage
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
-            if(enemy.alive == true)
+            if(enemy.GetAlive() == true)
             {
                 AttackChoice();
             }
             else
             {
-                user.HasWon = true;
+                user.SetVictory(true);
             }
             user.CheckPlayer();
             enemy.CheckEnemy();
@@ -177,32 +177,33 @@ namespace HealthSystem4
                     x = 1;
                 }else if(answer == "3")
                 {
-                    if(user.health == user.maxHealth)
+                    if(user.GetHealth() == user.GetMaxHealth())
                     {
-                        Console.WriteLine("You can't heal past your max health which is: " + user.maxHealth);
+                        Console.WriteLine("You can't heal past your max health which is: " + user.GetMaxHealth());
                         Console.ReadKey(true);
                         Console.Clear();
-                        user.ShowStatsPlayer();
+                        user.ShowStats();
                         enemy.ShowStats();
                     }
                     else { user.Heal(debugHeal); FoeAI(); x = 1; }
                 }
                 else if (answer == "4")
                 {
-                    if (user.shield == user.maxShield)
+                    if (user.GetShield() == user.GetMaxShield())
                     {
-                        Console.WriteLine("You can't regen past your max shield which is: " + user.maxShield);
+                        Console.WriteLine("You can't regen past your max shield which is: " + user.GetMaxShield());
                         Console.ReadKey(true);
                         Console.Clear();
-                        user.ShowStatsPlayer();
+                        user.ShowStats();
                         enemy.ShowStats();
                     }
                     else { user.Regenerate(debugHeal); FoeAI(); x = 1; }
                 }
                 else
                 {
+                    
                     Console.Clear();
-                    user.ShowStatsPlayer();
+                    user.ShowStats();
                     enemy.ShowStats();
                 }
             }
@@ -224,87 +225,88 @@ namespace HealthSystem4
         static void Debug()
         {
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             Console.ReadKey();
             user.TakeDamage(10);
             enemy.TakeDamage(10);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             user.Regenerate(10);
             enemy.Heal(10);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             user.TakeDamage(110);
             enemy.TakeDamage(110);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             user.Heal(10);
             enemy.Heal(10);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             user.TakeDamage(-110);
             enemy.TakeDamage(-110);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             user.Heal(-10);
             enemy.Heal(-10);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             user.TakeDamage(999);
             enemy.TakeDamage(999);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             enemy.ShowStats();
             user.CheckPlayer();
             enemy.CheckEnemy();
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.TakeDamage(150);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.Regenerate(150);
             user.Heal(150);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.TakeDamage(999);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.CheckPlayer();
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.TakeDamage(999);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.CheckPlayer();
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.TakeDamage(999);
             Console.ReadKey();
             Console.Clear();
-            user.ShowStatsPlayer();
+            user.ShowStats();
             user.CheckPlayer();
             Console.ReadKey();
+            Console.WriteLine(" ");
             Console.WriteLine("Debug Mode has ended. We have tested the following: ");
             Console.WriteLine("-Damage Spill over");
             Console.WriteLine("-No over healing or over regeneration");
